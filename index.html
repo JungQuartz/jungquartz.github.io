@@ -124,54 +124,7 @@
   <time datetime="2020-07-25T00:55:04.000Z" itemprop="datePublished">2020-07-25</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h1><p>因公司线上问题，复习事务相关知识</p>
-<ol>
-<li>事务的传播行为，隔离级别，嵌套事务；</li>
-<li>mysql自定义函数的sequce（序列）中的坑，最佳使用，死锁的产生；</li>
-<li>Thread.sleep的使用；</li>
-<li>如何定义数据库基础组件（传播行为如何抉择）；</li>
-</ol>
-<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>事务就是将用户一系列操作，视为一个完整的逻辑处理工作单元。</p>
-<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><p>即ACID 共四项：原子性，一致性，隔离性，持久性</p>
-<ol>
-<li>原子性（Atomicity）：要么全部成功，要么全部失败</li>
-<li>一致性（Consistency）：从一个正确的状态到另一个正确的状态</li>
-<li>隔离性（Isolation）：事务和事务间相对独立，互不影响</li>
-<li>持久性（Durability）：事务提交后，应被持久化</li>
-</ol>
-<p><em>C是目标，AID是手段</em></p>
-<h2 id="并发事务带来的问题"><a href="#并发事务带来的问题" class="headerlink" title="并发事务带来的问题"></a>并发事务带来的问题</h2><p>共四项：脏读，丢失修改，不可重复读，幻读</p>
-<ol>
-<li>脏读（Dirty read）：a事务数据修改尚未提交，b事务读取该数据并使用，该数据为脏数据，b事务发生脏读</li>
-<li>丢失修改（Lost to modify）: a事务读取数据，b事务读取该数据，a事务提交数据修改，b事务随后提交数据修改，则a事务修改丢失</li>
-<li>不可重复读（Unrepeatableread）: a事务读取同一数据两次，在两次读取间，b事务修改该数据，则a事务两次读取同一数据值不一致，即为不可重复读</li>
-<li>幻读（Phantom read）: 与不可重复读类似，区别是幻读中，数据进行了新增或删除，而不可重复读为数据修改</li>
-</ol>
-<h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><p>共四项：读未提交，读已提交，可重复读，可串行化<br>mysql默认为 可重复读<br>公司数据库为 读已提交</p>
-<ol>
-<li>读未提交（READ-UNCOMMITTED）：最低隔离级别，允许读取未提交变更的数据</li>
-<li>读已提交（READ-COMMITTED）：与读为提交相反，允许读取已提交变更的数据</li>
-<li>可重复读（REPEATABLE-READ）：对同一字段多次读取一致</li>
-<li>可串行化（SERIALIZABLE）：最高的隔离级别，事务只能串行执行</li>
-</ol>
-<h2 id="Spring中事务传播行为"><a href="#Spring中事务传播行为" class="headerlink" title="Spring中事务传播行为"></a>Spring中事务传播行为</h2><p>即嵌套事务读处理方式<br>共七种，其中默认值为Propagation.REQUIRED，可手动指定其他传播方式</p>
-<ol>
-<li>Propagation.REQUIRED 如果当前存在事务，则加入该事务，如果当前不存在事务，则创建一个新的事务</li>
-<li>Propagation.SUPPORTS 如果当前存在事务，则加入该事务；如果当前不存在事务，则以非事务的方式继续运行</li>
-<li>Propagation.MANDATORY 如果当前存在事务，则加入该事务；如果当前不存在事务，则抛出异常。</li>
-<li>Propagation.REQUIRES_NEW 重新创建一个新的事务，如果当前存在事务，延缓当前的事务。 </li>
-<li>Propagation.NOT_SUPPORTED 以非事务的方式运行，如果当前存在事务，暂停当前的事务。 </li>
-<li>Propagation.NEVER 以非事务的方式运行，如果当前存在事务，则抛出异常</li>
-<li>Propagation.NESTED 如果没有，就新建一个事务；如果有，就在当前事务中嵌套其他事务。</li>
-</ol>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -210,27 +163,7 @@
   <time datetime="2020-07-24T18:23:00.837Z" itemprop="datePublished">2020-07-25</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
